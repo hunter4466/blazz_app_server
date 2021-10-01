@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import sticksdoll from '../images/icons/sticksdoll.svg';
 
 const HomePage = () => (
   <div className="homepage_container">

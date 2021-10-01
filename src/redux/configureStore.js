@@ -4,12 +4,11 @@ import {
 import logger from 'redux-logger';
 // ----------- PRODUCTS IMPORTS -----------
 import {
-  // --- Reducers --
+// --- Reducers --
 
-  // --- Middlewares --
+// --- Middlewares --
 
 } from './cart/products';
-
 
 const reducer = combineReducers({
   // ------------ Products Reducers -----
