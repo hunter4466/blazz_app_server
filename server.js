@@ -25,10 +25,10 @@ app.use(express.static(`${__dirname}/build`));
 
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: '35.199.110.46',
+  host: 'localhost',
   user: 'root',
-  password: 'jf7l2p93li',
-  database: 'mydb',
+  password: 'password',
+  database: 'blaz_app',
   multipleStatements: 'true',
 });
 
@@ -52,5 +52,5 @@ app.all('/users', (req, res) => {
 const PORT = '8080';
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('MakitApp API Listening in port', PORT, '...');
+  console.log('Blazapp API Listening in port', PORT, '...');
 });

@@ -7,6 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import HomePage from './components/homepage';
+import Configuration from './components/configuration';
 
 const App = () => {
   const handleStoreCloseClick = () => {
@@ -16,6 +17,7 @@ const App = () => {
       <div className="page_holder">
         <div className="navigator_bar">
           <NavLink activeClassName="selected_nav_item" className="nav_item" onClick={() => { handleStoreCloseClick(); }} to="/home">Home</NavLink>
+          <NavLink activeClassName="selected_nav_item" className="nav_item" onClick={() => { handleStoreCloseClick(); }} to="/config">Configuration</NavLink>
         </div>
         <Switch>
           <Route exact path="/">
@@ -23,6 +25,9 @@ const App = () => {
           </Route>
           <Route path="/home">
             <HomePage />
+          </Route>
+          <Route path="/config">
+            <Configuration />
           </Route>
         </Switch>
       </div>
