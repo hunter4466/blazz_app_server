@@ -29,16 +29,27 @@ const Login = () => {
   };
   return (
     <div className="login_main_container">
-      <div className="login_form_container">
-        <h1 className="login_form_title">Inicio de sesión</h1>
-        <input className="login_input" type="text" id="user_input" placeholder="Usuario" />
-        <input className="login_input" type={inputType} id="pass_input" placeholder="Contraseña" />
-        <div className="login_show_pass_area">
-          <p className="login_label">Mostrar contraseña</p>
-          <input className="login_checkbox" type="checkbox" onChange={() => { handleCheckBoxChange(); }} />
+      <div className="login_left_side">
+        <h1>Login IMG</h1>
+      </div>
+      <div className="login_right_side">
+        <div className="login_form_container">
+          <h1 className="login_form_title">Ingresa a tu cuenta</h1>
+          <h2 className="input_label">Usuario</h2>
+          <input className="login_input" type="text" id="user_input" placeholder="Usuario" />
+          <h2 className="input_label">Contraseña</h2>
+          <input className="login_input" type={inputType} id="pass_input" placeholder="Contraseña" />
+          <div className="login_show_pass_area">
+            <input className="login_checkbox" type="checkbox" onChange={() => { handleCheckBoxChange(); }} />
+            <h2 className="">Mostrar contraseña</h2>
+          </div>
+          <p className="login_msg">{loginMsg}</p>
+          <div className="login_show_pass_area">
+            <input className="login_checkbox" type="checkbox" onChange={() => { handleCheckBoxChange(); }} />
+            <h2 className="">Recordarme</h2>
+          </div>
+          <button className="login_btn" type="button" onClick={() => { handleLogin(); }}>Iniciar sesión</button>
         </div>
-        <button className="login_btn" type="button" onClick={() => { handleLogin(); }}>Iniciar sesión</button>
-        <p className="login_msg">{loginMsg}</p>
       </div>
     </div>
   );

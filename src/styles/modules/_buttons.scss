@@ -15,21 +15,15 @@
   box-shadow: 0.3vw 0.3vw 2vw 0.3vw rgba(0, 0, 0, 0.1);
 }
 
-@mixin back_btn($width, $height) {
+@mixin regular_btn($width, $height) {
   width: $width;
   height: $height;
-  background-color: rgb(225, 60, 60);
+  background-color: #6B5699;
   border-style: solid;
   border-color: transparent;
-  border-radius: 3vw 0 0 3vw;
+  border-radius: 5px;
   color: white;
-
-  @include customFont(Lato8, 6vw);
-
-  position: fixed;
-  top: 80vh;
-  right: 0;
-  box-shadow: 0.3vw 0.3vw 2vw 0.3vw rgba(0, 0, 0, 0.1);
+  @include customFont(Roboto10, 16px);
 }
 
 @mixin storePickerBtn($width, $height, $marginh, $marginv) {

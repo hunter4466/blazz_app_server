@@ -38,13 +38,20 @@ app.get('/home', (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/build/index.html`));
 });
 /* ---------------------------API-------------------------*/
-app.all('/users', (req, res) => {
+app.get('/getUserAuth/:id/:id2', (req, res) => {
   pool.getConnection((err, conn) => {
-    const query = 'SELECT * FROM users';
+    if (err) { throw err; }
+
+    const query = `SELECT * FROM users WHERE user = '${req.params.id}' AND pass = '${req.params.id2}'`;
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
-      res.send(lines);
-      conn.release();
+      if (lines.length > 0) {
+        res.send({ auth: true, userName: lines[0].name, userLastName: lines[0].last_name });
+        conn.release();
+      } else {
+        res.send({ auth: false, error: 'User not found' });
+        conn.release();
+      }
     });
   });
 });
