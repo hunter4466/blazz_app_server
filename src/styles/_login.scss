@@ -4,73 +4,89 @@
 @import './modules/transitions.scss';
 @import './fonts';
 
-
 .login_main_container {
-    @include flexbox(row);
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.02);
+  @include flexbox(row);
+
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.02);
 }
+
 .login_left_side {
-    height: 100%;
-    width: 50%;
-    background-color: #6B5699;
+  height: 100%;
+  width: 50%;
+  background-color: #6b5699;
 }
+
 .login_right_side {
-    height: 100%;
-    width: 50%;
-    min-width: 400px;
+  height: 100%;
+  width: 50%;
+  min-width: 400px;
 }
 // ---------- Login Window ----------- //
 
 .login_form_container {
-    @include sizeAndCenterRel(350px, 500px);
-    @include flexbox(column);
+  @include sizeAndCenterRel(350px, 500px);
+  @include flexbox(column);
 }
 
 .login_form_title {
-    @include customFont(Roboto3, 32px);
-    width:100%;
-    height: 50px;
-    text-align: left;
-    margin: 0;
-    color: rgba(0, 0, 0, 0.8);
-    margin-left: -2px;
+  @include customFont(Roboto3, 32px);
+
+  width: 100%;
+  height: 50px;
+  text-align: left;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: -2px;
 }
+
 .input_label {
-    @include customFont(Roboto10, 16px);
-    color: rgba(0, 0, 0, 0.7);
+  @include customFont(Roboto10, 16px);
+
+  color: rgba(0, 0, 0, 0.7);
 }
+
 .login_input {
-    @include customFont(Roboto8, 14px);
-    width: 331px;
-    height: 46px;
-    @include customBorderRTWC(5px, solid, 1px, #E8E8E8);
-    color: rgba(0, 0, 0, 0.7);
-    padding-left: 15px;
-    &:focus{
-        outline: none;
-    }
+  @include customFont(Roboto8, 14px);
+
+  width: 331px;
+  height: 46px;
+
+  @include customBorderRTWC(5px, solid, 1px, #E8E8E8);
+
+  color: rgba(0, 0, 0, 0.7);
+  padding-left: 15px;
+
+  &:focus {
+    outline: none;
+  }
 }
+
 .login_show_pass_area {
-    @include flexbox(row);
+  @include flexbox(row);
 }
+
 .login_show_pass_area h2 {
-    @include customFont(Roboto10, 12px);
-    color: rgba(0, 0, 0, 0.7);
+  @include customFont(Roboto10, 12px);
+
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .login_show_pass_area input {
-    height: 17px;
-    width: 17px;
-    margin-top: 8px;
-    margin-right: 5px;
+  height: 17px;
+  width: 17px;
+  margin-top: 8px;
+  margin-right: 5px;
 }
+
 .login_msg {
-    @include customFont(Roboto10, 12px);
-    color: red;
+  @include customFont(Roboto10, 12px);
+
+  color: red;
 }
+
 .login_btn {
   @include regular_btn(350px, 50px);
 }

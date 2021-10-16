@@ -4,21 +4,23 @@
 @mixin regular_btn($width, $height) {
   width: $width;
   height: $height;
-  background-color: #6B5699;
+  background-color: #6b5699;
   border-style: solid;
   border-color: transparent;
   border-radius: 5px;
   border-width: 1px;
   color: white;
+
   @include customFont(Roboto10, 16px);
 }
 
 @mixin navigation_btn($width, $height) {
-  background-color: #6B5699;
+  background-color: #6b5699;
   border-style: solid;
   border-color: black;
   border-radius: 5px;
   color: white;
+
   @include customFont(Roboto10, 16px);
   @include sizeAndCenterRelHor($width, $height);
 }

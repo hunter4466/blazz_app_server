@@ -5,22 +5,24 @@
 @import './fonts';
 
 .homepage_container {
-    width: 100%;
-    height: 100vh;
+  width: 100%;
+  height: 100vh;
 }
+
 .page_holder {
-    width: 100%;
-    height: 100vh;
-    @include flexbox(row);
+  width: 100%;
+  height: 100vh;
+
+  @include flexbox(row);
 }
 // --------------------- Navigation Bar ---------- //
 .navigation_bar {
   @include flexbox(column);
-  background-color: #6B5699;
+
+  background-color: #6b5699;
   height: 100%;
   width: 412px;
 }
 
 .nav_item {
-  @include navigation_btn(268px, 45px)
-}
+  @include navigation_btn(268px, 45px); }
