@@ -1,4 +1,3 @@
-let obj = { name: 'mario', id: 1, phone: 9329392 }
+const obj = { name: 'mario', id: 1, phone: 9329392 };
 
-
-console.log(Object.keys(obj))
+console.log(Object.keys(obj));
