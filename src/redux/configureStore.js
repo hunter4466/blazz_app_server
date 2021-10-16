@@ -2,21 +2,26 @@ import {
   createStore, compose, combineReducers, applyMiddleware,
 } from 'redux';
 import logger from 'redux-logger';
-// ----------- PRODUCTS IMPORTS -----------
+// ----------- STORE IMPORTS -----------
 import {
 // --- Reducers --
-
-// --- Middlewares --
-
-} from './cart/products';
+  switchReducer,
+  userInfoReducer,
+  // --- Middlewares --
+  activatePanelMiddleware,
+  fetchUserAuthMiddleware,
+} from './app/app';
 
 const reducer = combineReducers({
-  // ------------ Products Reducers -----
+  // ------------  Reducers -----
+  switchReducer,
+  userInfoReducer,
 });
 
 const composedEnhancer = compose(
-  // ------------ Products Middlewares -----
-
+  // ------------ Middlewares -----
+  applyMiddleware(fetchUserAuthMiddleware),
+  applyMiddleware(activatePanelMiddleware),
   // ------------- Logger --------------
   applyMiddleware(logger),
 );

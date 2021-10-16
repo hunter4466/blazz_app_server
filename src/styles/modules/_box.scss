@@ -24,3 +24,10 @@
   border-radius: 4px;
   background-color: rgb(232, 151, 0);
 }
+
+@mixin customBorderRTWC($radius, $style, $width, $color) {
+  border-radius: $radius;
+  border-style: $style;
+  border-width: $width;
+  border-color: $color;
+}

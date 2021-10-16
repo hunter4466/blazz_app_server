@@ -1,35 +1,26 @@
 @import '../fonts';
+@import './locations.scss';
 
-@mixin menu_btn($width, $height, $marginh, $marginv) {
+@mixin regular_btn($width, $height) {
   width: $width;
   height: $height;
-  margin-left: $marginh;
-  margin-right: $marginh;
-  margin-top: $marginv;
-  margin-bottom: $marginv;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 2vw;
-  background-color: white;
-  border-color: rgb(225, 225, 225);
-  box-shadow: 0.3vw 0.3vw 2vw 0.3vw rgba(0, 0, 0, 0.1);
-}
-
-@mixin back_btn($width, $height) {
-  width: $width;
-  height: $height;
-  background-color: rgb(225, 60, 60);
+  background-color: #6B5699;
   border-style: solid;
   border-color: transparent;
-  border-radius: 3vw 0 0 3vw;
+  border-radius: 5px;
+  border-width: 1px;
   color: white;
+  @include customFont(Roboto10, 16px);
+}
 
-  @include customFont(Lato8, 6vw);
-
-  position: fixed;
-  top: 80vh;
-  right: 0;
-  box-shadow: 0.3vw 0.3vw 2vw 0.3vw rgba(0, 0, 0, 0.1);
+@mixin navigation_btn($width, $height) {
+  background-color: #6B5699;
+  border-style: solid;
+  border-color: black;
+  border-radius: 5px;
+  color: white;
+  @include customFont(Roboto10, 16px);
+  @include sizeAndCenterRelHor($width, $height);
 }
 
 @mixin storePickerBtn($width, $height, $marginh, $marginv) {

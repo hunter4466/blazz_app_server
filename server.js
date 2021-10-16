@@ -25,10 +25,10 @@ app.use(express.static(`${__dirname}/build`));
 
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: '35.199.110.46',
+  host: 'localhost',
   user: 'root',
-  password: 'jf7l2p93li',
-  database: 'mydb',
+  password: 'password',
+  database: 'blaz_app',
   multipleStatements: 'true',
 });
 
@@ -38,13 +38,20 @@ app.get('/home', (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/build/index.html`));
 });
 /* ---------------------------API-------------------------*/
-app.all('/users', (req, res) => {
+app.get('/getUserAuth/:id/:id2', (req, res) => {
   pool.getConnection((err, conn) => {
-    const query = 'SELECT * FROM users';
+    if (err) { throw err; }
+
+    const query = `SELECT * FROM users WHERE user = '${req.params.id}' AND pass = '${req.params.id2}'`;
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
-      res.send(lines);
-      conn.release();
+      if (lines.length > 0) {
+        res.send({ auth: true, userName: lines[0].name, userLastName: lines[0].last_name });
+        conn.release();
+      } else {
+        res.send({ auth: false, error: 'User not found' });
+        conn.release();
+      }
     });
   });
 });
@@ -52,5 +59,5 @@ app.all('/users', (req, res) => {
 const PORT = '8080';
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('MakitApp API Listening in port', PORT, '...');
+  console.log('Blazapp API Listening in port', PORT, '...');
 });

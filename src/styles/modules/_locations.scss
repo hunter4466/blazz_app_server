@@ -1,4 +1,4 @@
-@mixin sizeAndCenter($width, $height) {
+@mixin sizeAndCenterAbs($width, $height) {
   position: absolute;
   width: $width;
   height: $height;
@@ -6,6 +6,31 @@
   margin-top: -$height/2;
   left: 50vw;
   top: 50vh;
+}
+@mixin sizeAndCenterRel($width, $height) {
+  position: relative;
+  width: $width;
+  height: $height;
+  margin-left: -$width/2;
+  margin-top: -$height/2;
+  left: 50%;
+  top: 50%;
+}
+
+@mixin sizeAndCenterRelHor($width, $height) {
+  position: relative;
+  width: $width;
+  height: $height;
+  margin-left: -$width/2;
+  left: 50%;
+}
+
+@mixin sizeAndCenterRelVert($width, $height) {
+  position: relative;
+  width: $width;
+  height: $height;
+  margin-top: -$height/2;
+  top: 50%;
 }
 
 @mixin floatAndSize($width,$height,$float: left) {

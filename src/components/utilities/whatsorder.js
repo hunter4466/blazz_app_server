@@ -15,7 +15,7 @@ const whatsorder = (order) => {
   });
   if (order.orderdeliverystate) {
     stringArray.push(`%0A%20Lo%20deseo%20para%20delivery%20🏍️%0A%20a%20la%20dirección:%0A%20*%20${order.orderaddress.split(' ').join('%20')}%0A%20Referencia:%0A%20*%20${order.orderaddressref.split(' ').join('%20')}`);
-  } else { stringArray.push('%0A%20Deseo%20recogerlo%20en%20el%20local%20🏠'); }
+  } else { stringArray.push('%0A%20%20recogerlo%20en%20el%20local%20🏠'); }
   stringArray.push(`%0A%0A%20💰%20El%20monto%20total%20de%20mi%20orden%20es%20de%20S/%20${parseFloat(order.orderamounttotal).toFixed(2)}%0A%0A`);
   if (order.orderdeliveryamount > 0) { stringArray.push('%20Incluido%20el%20recargo%20por%20envío%20de%20S/%204.90%0A%0A'); } else { stringArray.push('%20Incluido%20el%20recargo%20por%20envío%20de%20S/%204.90%0A%0A'); }
   stringArray.push(`%20💳%20Realizaré%20el%20pago%20a%20través%20de:%20${order.paymentmethod.split(' ').join('%20')}`);
