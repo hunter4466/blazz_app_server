@@ -20,7 +20,7 @@ const Mainlogged = () => (
   <div className="homepage_container">
     <Router>
       <div className="page_holder">
-        <div className="navigator_bar">
+        <div className="navigation_bar">
           <NavLink activeClassName="selected_nav_item" className="nav_item" to="/welcome_page">Pagina de Bienvenida</NavLink>
           <NavLink activeClassName="selected_nav_item" className="nav_item" to="/my_products">Mis productos</NavLink>
           <NavLink activeClassName="selected_nav_item" className="nav_item" to="/my_orders">Órdenes</NavLink>
@@ -61,7 +61,6 @@ const Mainlogged = () => (
         </Switch>
       </div>
     </Router>
-    ;
   </div>
 );
 export default Mainlogged;
