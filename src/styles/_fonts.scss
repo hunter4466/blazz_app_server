@@ -1,0 +1,75 @@
+@import "./modules/box";
+@import "./modules/locations";
+@import "./modules/transitions";
+
+@font-face {
+  font-family: 'Roboto1';
+  src: url('./fonts/Roboto-Black.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto2';
+  src: url('./fonts/Roboto-BlackItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto3';
+  src: url('./fonts/Roboto-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto4';
+  src: url('./fonts/Roboto-BoldItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto5';
+  src: url('./fonts/Roboto-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto6';
+  src: url('./fonts/Roboto-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto7';
+  src: url('./fonts/Roboto-LightItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto8';
+  src: url('./fonts/Roboto-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto9';
+  src: url('./fonts/Roboto-MediumItalic.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto10';
+  src: url('./fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto11';
+  src: url('./fonts/Roboto-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto12';
+  src: url('./fonts/Roboto-ThinItalic.ttf');
+}
+
+.quote_container {
+  width: 90vw;
+  height: 70vh;
+
+  @include fade-enter;
+}
+
+@mixin customFont ($font, $fontsize) {
+  font-family: $font, serif;
+  font-size: $fontsize;
+}
