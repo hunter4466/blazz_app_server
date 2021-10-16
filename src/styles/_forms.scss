@@ -1,0 +1,21 @@
+.form-inputs {
+  margin-bottom: 0.5rem;
+  width: 80%;
+}
+
+.form-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  color: rgb(0, 0, 0);
+}
+
+.form-input {
+  display: flex;
+  padding-left: 10px;
+  outline: inherit;
+  border-radius: 2px;
+  height: 40px;
+  width: 100%;
+  border: groove;
+}
