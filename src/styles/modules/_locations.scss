@@ -7,6 +7,7 @@
   left: 50vw;
   top: 50vh;
 }
+
 @mixin sizeAndCenterRel($width, $height) {
   position: relative;
   width: $width;
