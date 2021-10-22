@@ -1,0 +1,46 @@
+@import './modules/buttons.scss';
+@import './modules/box.scss';
+@import './modules/locations.scss';
+@import './modules/transitions.scss';
+@import './fonts';
+
+.my_products_main_container {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(218, 199, 199);
+  border-color: black;
+  border-style: solid;
+  border-width: 10px;
+}
+
+.category_area_a {
+  width: 80%;
+  height: 150px;
+  margin-left: 10%;
+  background-color: rgb(162, 147, 147);
+}
+
+.category_picker_b {
+    @include flexbox(row);
+    width: 100%;
+    height: 20px;
+}
+
+.product_area_b {
+    @include flexbox(row);
+}
+
+.product_image_c {
+    width: 20%;
+    @include flexbox(column);
+}
+
+.product_content_area_c {
+    width: 60%;
+    @include flexbox(column);
+}
+
+.product_config_area_c {
+    width: 20%;
+    @include flexbox(column);
+}

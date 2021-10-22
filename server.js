@@ -46,7 +46,35 @@ app.get('/getUserAuth/:id/:id2', (req, res) => {
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
       if (lines.length > 0) {
-        res.send({ auth: true, userName: lines[0].name, userLastName: lines[0].last_name });
+        res.send({
+          auth: true,
+          userName: lines[0].name,
+          userLastName: lines[0].last_name,
+          ato: lines[0].access_token,
+        });
+        conn.release();
+      } else {
+        res.send({ auth: false, error: 'User not found' });
+        conn.release();
+      }
+    });
+  });
+});
+
+app.get('/getUsertkAuth/:id', (req, res) => {
+  console.log('triggered');
+  pool.getConnection((err, conn) => {
+    if (err) { throw err; }
+    const query = `SELECT * FROM users WHERE access_token = ${req.params.id}`;
+    conn.query(query, (error, lines) => {
+      if (error) { throw error; }
+      if (lines.length > 0) {
+        res.send({
+          auth: true,
+          userName: lines[0].name,
+          userLastName: lines[0].last_name,
+          ato: lines[0].access_token,
+        });
         conn.release();
       } else {
         res.send({ auth: false, error: 'User not found' });

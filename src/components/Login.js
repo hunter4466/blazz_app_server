@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkUserAuth } from '../redux/app/app';
+import { checkUserAuth, checkUserTokenAuth } from '../redux/app/app';
+import storageAvailable from './utilities/localstorage';
 
 const Login = () => {
   const userState = useSelector((state) => state.userInfoReducer);
   const dispatch = useDispatch();
   const [loginMsg, setLoginMsg] = useState('');
   const [inputType, setInputType] = useState('password');
-  const handleLogin = () => {
+  const loginAction = () => {
     const userInput = document.getElementById('user_input');
     const userPass = document.getElementById('pass_input');
     const loginMsg = 'Usuario o contraseña incorrectos, por favor intenta de nuevo';
@@ -19,6 +20,16 @@ const Login = () => {
     } else {
       setLoginMsg(loginMsg);
     }
+  };
+  useEffect(() => {
+    if (storageAvailable('localStorage')) {
+      if (localStorage.getItem('easyt')) {
+        dispatch(checkUserTokenAuth(localStorage.getItem('easyt')));
+      }
+    }
+  }, []);
+  const handleLogin = () => {
+    loginAction();
   };
   const handleCheckBoxChange = () => {
     if (inputType === 'text') {

@@ -7,6 +7,7 @@ import './styles/_fonts.scss';
 import './styles/_main.scss';
 import './styles/_login.scss';
 import './styles/_mainlogged.scss';
+import './styles/_my_products.scss';
 
 ReactDOM.render(
   <React.StrictMode>

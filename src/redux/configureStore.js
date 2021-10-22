@@ -10,6 +10,7 @@ import {
   // --- Middlewares --
   activatePanelMiddleware,
   fetchUserAuthMiddleware,
+  fetchUserTokenAuthMiddleware,
 } from './app/app';
 
 const reducer = combineReducers({
@@ -21,6 +22,7 @@ const reducer = combineReducers({
 const composedEnhancer = compose(
   // ------------ Middlewares -----
   applyMiddleware(fetchUserAuthMiddleware),
+  applyMiddleware(fetchUserTokenAuthMiddleware),
   applyMiddleware(activatePanelMiddleware),
   // ------------- Logger --------------
   applyMiddleware(logger),
