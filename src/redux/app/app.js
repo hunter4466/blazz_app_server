@@ -5,6 +5,8 @@ const STORE_USER = 'REDUX/APP/APP/STORE_USER';
 const CHECK_USER_AUTH = 'REDUX/APP/APP/CHECK_USER_AUTH';
 const LOG_OUT = 'REDUX/APP/APP/LOG_OUT';
 const CHECK_USER_TOKEN_AUTH = 'REDUX/APP/APP/CHECK_USER_TOKEN_AUTH';
+const LOAD_BUSINESS = 'REDUX/APP/APP/LOAD_BUSINESS';
+const STORE_BUSINESS_DATA = 'REDUX/APP/APP/STORE_BUSINESS_DATA';
 // ---------------- paths (Switch) ------------------
 const SWITCH_LOGIN_STATE = 'REDUX/APP/APP/SWITCH_LOGIN_STATE';
 const SWITCH_PANEL_STATE = 'REDUX/APP/APP/SWITCH_PANEL_STATE';
@@ -31,6 +33,14 @@ const logOutAction = () => ({
 });
 const checkUserTokenAuth = (payload) => ({
   type: CHECK_USER_TOKEN_AUTH,
+  payload,
+});
+const loadBusiness = (payload) => ({
+  type: LOAD_BUSINESS,
+  payload,
+});
+const saveBusinessInfo = (payload) => ({
+  type: STORE_BUSINESS_DATA,
   payload,
 });
 // --------------- Switch initial stateS -------------
@@ -88,8 +98,10 @@ const userInfoReducer = (state = userInitialState, action) => {
       return state;
   }
 };
-const productsStoreReducer = (state = {}, action) => {
+const businessReducer = (state = {}, action) => {
   switch (action.type) {
+    case STORE_BUSINESS_DATA:
+      return action.payload;
     default:
       return state;
   }
@@ -97,7 +109,9 @@ const productsStoreReducer = (state = {}, action) => {
 // ---------- Middlewares and Side Effects ----------
 const activatePanelMiddleware = (store) => (next) => (action) => {
   if (action.type === STORE_USER) {
+    console.log(action.payload.userId);
     if (action.payload.auth) {
+      store.dispatch(loadBusiness(action.payload.userId));
       store.dispatch(switchLoginState(false));
       store.dispatch(switchPanelState(true));
     }
@@ -128,12 +142,24 @@ const fetchUserTokenAuthMiddleware = (store) => (next) => (action) => {
   next(action);
 };
 
+const loadBusinessFetchMiddleware = (store) => (next) => (action) => {
+  if (action.type === LOAD_BUSINESS) {
+    console.log(action.payload);
+    fetch(`/loadBusiness/${action.payload}`, {
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    }).then((response) => response.json())
+      .then((json) => store.dispatch(saveBusinessInfo(json)));
+  }
+  next(action);
+};
 // --------------------- Exports --------------------
 export {
   // --------- Reducers ---------
   switchReducer,
   userInfoReducer,
-  productsStoreReducer,
+  businessReducer,
   // ----- Actions (Switch) -----
   switchLoginState,
   switchPanelState,
@@ -146,4 +172,5 @@ export {
   activatePanelMiddleware,
   fetchUserAuthMiddleware,
   fetchUserTokenAuthMiddleware,
+  loadBusinessFetchMiddleware,
 };

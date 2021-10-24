@@ -7,16 +7,19 @@ import {
 // --- Reducers --
   switchReducer,
   userInfoReducer,
+  businessReducer,
   // --- Middlewares --
   activatePanelMiddleware,
   fetchUserAuthMiddleware,
   fetchUserTokenAuthMiddleware,
+  loadBusinessFetchMiddleware,
 } from './app/app';
 
 const reducer = combineReducers({
   // ------------  Reducers -----
   switchReducer,
   userInfoReducer,
+  businessReducer,
 });
 
 const composedEnhancer = compose(
@@ -24,6 +27,7 @@ const composedEnhancer = compose(
   applyMiddleware(fetchUserAuthMiddleware),
   applyMiddleware(fetchUserTokenAuthMiddleware),
   applyMiddleware(activatePanelMiddleware),
+  applyMiddleware(loadBusinessFetchMiddleware),
   // ------------- Logger --------------
   applyMiddleware(logger),
 );

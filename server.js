@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const mysql = require('mysql');
 const path = require('path');
+const deduperfunc = require('./server_utilities/deduper');
 
 const app = express();
 
@@ -37,22 +38,59 @@ const pool = mysql.createPool({
 app.get('/home', (req, res) => {
   res.sendFile(path.resolve(`${__dirname}/build/index.html`));
 });
+
 /* ---------------------------API-------------------------*/
 app.get('/getUserAuth/:id/:id2', (req, res) => {
   pool.getConnection((err, conn) => {
     if (err) { throw err; }
-
     const query = `SELECT * FROM users WHERE user = '${req.params.id}' AND pass = '${req.params.id2}'`;
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
       if (lines.length > 0) {
-        res.send({
-          auth: true,
-          userName: lines[0].name,
-          userLastName: lines[0].last_name,
-          ato: lines[0].access_token,
+        const query2 = `SELECT * FROM business WHERE users_id = ${lines[0].id} AND active = 1`;
+        conn.query(query2, (error2, lines2) => {
+          if (error2) { throw error2; }
+          if (lines2.length > 0) {
+            res.send({
+              auth: true,
+              userId: lines[0].id,
+              userName: lines[0].name,
+              userLastName: lines[0].last_name,
+              userEmail: lines[0].email,
+              userUser: lines[0].user,
+              userPass: lines[0].pass,
+              userPhone: lines[0].phone,
+              userDateOfBirth: lines[0].date_of_birth,
+              ato: lines[0].access_token,
+              activeBusiness: true,
+              business: {
+                id: lines2[0].id,
+                name: lines2[0].name,
+                address: lines2[0].address,
+                description: lines2[0].description,
+                backgroundImg: lines2[0].background_img,
+                logoImg: lines2[0].logo_img,
+                usersId: lines2[0].users_id,
+              },
+            });
+            conn.release();
+          } else {
+            res.send({
+              auth: true,
+              userId: lines[0].id,
+              userName: lines[0].name,
+              userLastName: lines[0].last_name,
+              userEmail: lines[0].email,
+              userUser: lines[0].user,
+              userPass: lines[0].pass,
+              userPhone: lines[0].phone,
+              userDateOfBirth: lines[0].date_of_birth,
+              ato: lines[0].access_token,
+              activeBusiness: false,
+            });
+            conn.release();
+          }
         });
-        conn.release();
       } else {
         res.send({ auth: false, error: 'User not found' });
         conn.release();
@@ -62,22 +100,79 @@ app.get('/getUserAuth/:id/:id2', (req, res) => {
 });
 
 app.get('/getUsertkAuth/:id', (req, res) => {
-  console.log('triggered');
   pool.getConnection((err, conn) => {
     if (err) { throw err; }
     const query = `SELECT * FROM users WHERE access_token = ${req.params.id}`;
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
       if (lines.length > 0) {
-        res.send({
-          auth: true,
-          userName: lines[0].name,
-          userLastName: lines[0].last_name,
-          ato: lines[0].access_token,
+        const query2 = `SELECT * FROM business WHERE users_id = ${lines[0].id} AND active = 1`;
+        conn.query(query2, (error2, lines2) => {
+          if (error2) { throw error2; }
+          if (lines2.length > 0) {
+            res.send({
+              auth: true,
+              userId: lines[0].id,
+              userName: lines[0].name,
+              userLastName: lines[0].last_name,
+              userEmail: lines[0].email,
+              userUser: lines[0].user,
+              userPass: lines[0].pass,
+              userPhone: lines[0].phone,
+              userDateOfBirth: lines[0].date_of_birth,
+              ato: lines[0].access_token,
+              activeBusiness: true,
+              business: {
+                id: lines2[0].id,
+                name: lines2[0].name,
+                address: lines2[0].address,
+                description: lines2[0].description,
+                backgroundImg: lines2[0].background_img,
+                logoImg: lines2[0].logo_img,
+                usersId: lines2[0].users_id,
+              },
+            });
+            conn.release();
+          } else {
+            res.send({
+              auth: true,
+              userId: lines[0].id,
+              userName: lines[0].name,
+              userLastName: lines[0].last_name,
+              userEmail: lines[0].email,
+              userUser: lines[0].user,
+              userPass: lines[0].pass,
+              userPhone: lines[0].phone,
+              userDateOfBirth: lines[0].date_of_birth,
+              ato: lines[0].access_token,
+              activeBusiness: false,
+            });
+            conn.release();
+          }
         });
-        conn.release();
       } else {
         res.send({ auth: false, error: 'User not found' });
+        conn.release();
+      }
+    });
+  });
+});
+
+app.get('/loadBusiness/:id', (req, res) => {
+  pool.getConnection((err, conn) => {
+    if (err) { throw err; }
+
+    const query = `CALL LOAD_BUSINESS(${parseInt(req.params.id, 8)})`;
+    conn.query(query, (error, lines) => {
+      if (error) { throw error; }
+      if (lines.length > 0) {
+        const objectForDelivery = { activeBusiness: true, content: [] };
+        deduperfunc(lines);
+
+        res.send(objectForDelivery);
+        conn.release();
+      } else {
+        res.send({ activeBusiness: false, error: 'Business not found' });
         conn.release();
       }
     });
