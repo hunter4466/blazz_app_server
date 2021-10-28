@@ -43,3 +43,11 @@
     width: 20%;
     @include flexbox(column);
 }
+
+.description_input {
+    resize: none;
+}
+
+.prod_type_btn_pressed {
+    background-color:green;
+}

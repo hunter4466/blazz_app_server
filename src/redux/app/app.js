@@ -109,7 +109,6 @@ const businessReducer = (state = {}, action) => {
 // ---------- Middlewares and Side Effects ----------
 const activatePanelMiddleware = (store) => (next) => (action) => {
   if (action.type === STORE_USER) {
-    console.log(action.payload.userId);
     if (action.payload.auth) {
       store.dispatch(loadBusiness(action.payload.userId));
       store.dispatch(switchLoginState(false));
@@ -144,7 +143,6 @@ const fetchUserTokenAuthMiddleware = (store) => (next) => (action) => {
 
 const loadBusinessFetchMiddleware = (store) => (next) => (action) => {
   if (action.type === LOAD_BUSINESS) {
-    console.log(action.payload);
     fetch(`/loadBusiness/${action.payload}`, {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',

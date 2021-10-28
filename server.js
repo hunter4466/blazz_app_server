@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const mysql = require('mysql');
 const path = require('path');
-const deduperfunc = require('./server_utilities/deduper');
+const consolidatefunc = require('./server_utilities/consolidate');
 
 const app = express();
 
@@ -166,10 +166,7 @@ app.get('/loadBusiness/:id', (req, res) => {
     conn.query(query, (error, lines) => {
       if (error) { throw error; }
       if (lines.length > 0) {
-        const objectForDelivery = { activeBusiness: true, content: [] };
-        deduperfunc(lines);
-
-        res.send(objectForDelivery);
+        res.send(consolidatefunc(lines));
         conn.release();
       } else {
         res.send({ activeBusiness: false, error: 'Business not found' });
